@@ -1,0 +1,35 @@
+<h1>Pure Bot</h1>
+<!-- <div class="box"> -->
+<ng-container *ngFor="let message of messages | async">
+
+  <div class="message" [ngClass]="{ 'from': message.sentBy === 'bot',
+                                      'to':   message.sentBy === 'user' }">
+    {{ message.content }}
+  </div>
+
+</ng-container>
+<!-- </div> -->
+
+<!-- <div *ngFor="let storeMessage of storeMessages">
+  {{storeMessage?.content | json}}
+</div> -->
+<label for="nameField">Your Message</label>
+
+
+<input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text">
+
+<button (click)="sendMessage()">Send</button>
+
+<div>
+  <button (click)="saveFirstChat()">Save First Chat</button>
+</div>
+
+<div>
+  <button (click)="saveSecondChat()">Save Second Chat</button>
+</div>
+
+<h2>Compare texts</h2>
+
+<div>
+  <button (click)="compareTexts()">Compare texts</button>
+</div>
