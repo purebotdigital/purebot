@@ -5,7 +5,7 @@ import { ChatDialogComponent } from './chat/chat-dialog/chat-dialog.component';
 
 
 const routes: Routes = [{
-  path: 'chart',
+  path: 'chart/:similarityIndex',
   component: ChartComponent
 },
 {

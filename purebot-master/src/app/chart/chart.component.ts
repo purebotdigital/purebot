@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chart',
@@ -6,16 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chart.component.css']
 })
 export class ChartComponent implements OnInit {
-  title = 'Browser market shares at a specific website, 2014';
+  title = 'AI Ethics';
   type = 'ColumnChart';
-  data = [
-    ['Firefox', 64.0],
-    ['IE', 26.8],
-    ['Chrome', 12.8],
-    ['Safari', 8.5],
-    ['Opera', 6.2],
-    ['Others', 40.7]
-  ];
+  fairness;
+  dataProtection;
+  accountability;
+  transparency;
+  proActive;
+  data;
   piechartType = 'PieChart';
   columnNames = ['Browser', 'Percentage'];
   options = {
@@ -24,9 +23,24 @@ export class ChartComponent implements OnInit {
   };
   width = 550;
   height = 400;
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      const parsedData = JSON.parse(params.similarityIndex);
+      this.fairness = parsedData[0] * 100;
+      this.dataProtection = parsedData[1] * 100;
+      this.accountability = parsedData[2] * 100;
+      this.transparency = parsedData[3] * 100;
+      this.proActive = parsedData[4] * 100;
+      this.data = [
+        ['Proactiveness', this.proActive],
+        ['Fairness', this.fairness],
+        ['Data Protection', this.dataProtection],
+        ['Acountability', this.accountability],
+        ['Transparency', this.transparency],
+      ];
+    });
   }
 
 }

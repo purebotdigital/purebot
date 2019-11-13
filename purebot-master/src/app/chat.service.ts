@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 
 // Message class for displaying messages in the component
 export class Message {
-  constructor(public content: string, public sentBy: string) { }
+  constructor(public content: string, public sentBy: string, public intent?: string) { }
 }
 
 @Injectable()
@@ -27,9 +27,11 @@ export class ChatService {
     this.update(userMessage);
     return this.client.textRequest(msg)
       .then(res => {
+        console.log(res);
         const speech = res.result.fulfillment.speech;
+        const intent = res.result.metadata.intentName;
 
-        const botMessage = new Message(speech, 'bot');
+        const botMessage = new Message(speech, 'bot', intent);
         this.update(botMessage);
       });
   }
